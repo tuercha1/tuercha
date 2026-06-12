@@ -1,67 +1,54 @@
 # 网易云 NCM 解密器
 
-`NetEase NCM Decryptor` 是一个极小体积的 Windows 本地 NCM 解密/转换工具。
+一个很小的 Windows 本地 NCM 转换工具，主要用来把网易云音乐的 `.ncm` 文件转成原始音频。
 
-作者：tuercha
+这个版本用 x86 MASM 汇编写，目标就是尽量小。最终 exe 只有几 KB，不需要 .NET，不需要 VC++ 运行库，也不用额外带 DLL。
 
-## 功能
+## 怎么用
 
-- 将网易云音乐 `.ncm` 文件转换为原始音频流。
-- 双击运行，使用 Windows 原生文件选择框。
-- 不依赖 .NET。
-- 不依赖 VC++ 运行库。
-- 不需要额外携带第三方 DLL。
-- MP3 输出会尽量保留标题、艺人、专辑和内嵌封面。
-- 重点目标是尽可能压缩可执行文件体积。
+双击 `NCM转换器.exe`，选一个 `.ncm` 文件，转换后的音频会输出到同目录。
 
-## 项目结构
+MP3 会尽量带上标题、艺人、专辑和封面。
+
+## 源码里有什么
 
 ```text
-ncmmini.asm      MASM 汇编主源码
-build.cmd        本地一键构建脚本
-bcrypt_ord.def   bcrypt.dll 序号导入定义
-hpack.ps1        PE 头部压缩脚本
+ncmmini.asm      主源码
+build.cmd        一键构建
+bcrypt_ord.def   bcrypt 序号导入
+hpack.ps1        PE 头部压缩
 ```
 
-构建产物会输出到：
+运行 `build.cmd` 后，产物会输出到：
 
 ```text
 ..\exe\NCM转换器.exe
 ```
 
-## 构建要求
+## 构建需要
 
 - Windows
-- Microsoft Visual Studio 2022 Build Tools，并安装 MSVC x86 工具链
+- Visual Studio 2022 Build Tools
+- MSVC x86 工具链
 - PowerShell
 
-构建方式：
-
-```bat
-build.cmd
-```
-
-## 运行要求
+## 运行需要
 
 - Windows 7 或更高版本
-- 支持运行 32 位 x86 程序
-- 系统自带以下 DLL：
-  - `kernel32.dll`
-  - `user32.dll`
-  - `comdlg32.dll`
-  - `bcrypt.dll`
+- 能运行 32 位程序
+- 系统自带 `kernel32.dll`、`user32.dll`、`comdlg32.dll`、`bcrypt.dll`
 
-普通 Windows 10 / Windows 11 可以直接运行。Windows XP 不支持。
+Windows 10 / 11 正常可以直接运行。Windows XP 不支持。
 
 ## 参考
 
-本项目参考了 ncmdump 系列项目的 NCM 格式解析思路：
+NCM 格式解析思路参考了 ncmdump 系列：
 
-- taurusxin/ncmdump: https://github.com/taurusxin/ncmdump
-- 原始 ncmdump 脉络：anonymous5l/ncmdump
+- https://github.com/taurusxin/ncmdump
+- anonymous5l/ncmdump
 
-本仓库不是直接 fork，而是一个面向极小体积的 MASM 重新实现版本。
+这个仓库不是直接 fork，是重新做的极小体积 MASM 版本。
 
 ## 说明
 
-本项目为了压缩体积使用了比较激进的 PE 和链接优化，包括固定镜像基址、可写 `.text` 段、bcrypt 序号导入、合并 PE 段和 PE 头部压缩。
+为了压体积，这个版本用了比较激进的 PE 优化，比如固定镜像基址、可写 `.text` 段、bcrypt 序号导入、合并 PE 段和 PE 头部压缩。
