@@ -1,0 +1,9 @@
+LIBRARY bcrypt.dll
+EXPORTS
+BCryptCloseAlgorithmProvider@8=BCryptCloseAlgorithmProvider @3 NONAME
+BCryptDecrypt@40=BCryptDecrypt @10 NONAME
+BCryptDestroyKey@4=BCryptDestroyKey @16 NONAME
+BCryptGenerateSymmetricKey@28=BCryptGenerateSymmetricKey @34 NONAME
+BCryptGetProperty@24=BCryptGetProperty @36 NONAME
+BCryptOpenAlgorithmProvider@16=BCryptOpenAlgorithmProvider @42 NONAME
+BCryptSetProperty@20=BCryptSetProperty @56 NONAME
