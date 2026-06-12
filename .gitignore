@@ -1,4 +1,6 @@
 *.exe
+!exe/
+!exe/NCM转换器.exe
 *.obj
 *.lib
 *.exp
