@@ -1,4 +1,4 @@
-# NCM Converter ASM
+# NetEase NCM Decryptor
 
 Tiny local Windows NCM converter implemented in x86 MASM assembly.
 
