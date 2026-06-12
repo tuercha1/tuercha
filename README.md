@@ -1,28 +1,21 @@
 # 网易云 NCM 解密器
 
-一个很小的 Windows 本地 `.ncm` 转换工具。
-
-用 x86 MASM 写的。
-主要目标就是小，能用
-
 ## 用法
 
 双击 `NCM转换器.exe`。
 
-选一个 `.ncm` 文件。
+选择 `.ncm` 文件。
 
-转换后的音频会出现在原文件旁边。
+输出文件会在原文件同目录。
 
-如果转出来是 MP3，会尽量把标题、艺人、专辑、封面也带上。
+## 构建
 
-## 里面有什么
+需要：
 
-```text
-ncmmini.asm      主体
-build.cmd        构建脚本
-bcrypt_ord.def   bcrypt 序号导入
-hpack.ps1        PE 头压缩
-```
+- Windows
+- Visual Studio 2022 Build Tools
+- MSVC x86 工具链
+- PowerShell
 
 运行：
 
@@ -30,38 +23,13 @@ hpack.ps1        PE 头压缩
 build.cmd
 ```
 
-产物在：
+## 运行
 
-```text
-..\exe\NCM转换器.exe
-```
+需要 Windows 7 及以上。
 
-## 构建要什么
-
-- Windows
-- Visual Studio 2022 Build Tools
-- MSVC x86 工具链
-- PowerShell
-
-没有这些就别硬编了，会很痛苦。
-
-## 运行要什么
-
-- Windows 7 及以上
-- 能跑 32 位程序
-- 系统里有这些 DLL：
-  - `kernel32.dll`
-  - `user32.dll`
-  - `comdlg32.dll`
-  - `bcrypt.dll`
-
-Windows 10 / 11 一般直接能跑。
-
+Windows 10 / 11 可以直接运行。
 
 ## 参考
 
-NCM 结构解析参考了 ncmdump 这一系：
-
 - https://github.com/taurusxin/ncmdump
 - anonymous5l/ncmdump
-
