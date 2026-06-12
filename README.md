@@ -1,69 +1,67 @@
-# NetEase NCM Decryptor
+# 网易云 NCM 解密器
 
-Tiny local Windows NCM converter implemented in x86 MASM assembly.
+`NetEase NCM Decryptor` 是一个极小体积的 Windows 本地 NCM 解密/转换工具。
 
-Author: tuercha
+作者：tuercha
 
-## Features
+## 功能
 
-- Converts NetEase Cloud Music `.ncm` files to the original audio stream.
-- Double-click Windows GUI file picker.
-- No .NET runtime.
-- No VC++ runtime.
-- No bundled third-party DLLs.
-- Keeps MP3 title, artist, album, and embedded cover metadata when present.
-- Optimized for extremely small executable size.
+- 将网易云音乐 `.ncm` 文件转换为原始音频流。
+- 双击运行，使用 Windows 原生文件选择框。
+- 不依赖 .NET。
+- 不依赖 VC++ 运行库。
+- 不需要额外携带第三方 DLL。
+- MP3 输出会尽量保留标题、艺人、专辑和内嵌封面。
+- 重点目标是尽可能压缩可执行文件体积。
 
-## Project Layout
+## 项目结构
 
 ```text
-ncmmini.asm      Main MASM source
-build.cmd        Local one-click build script
-bcrypt_ord.def   bcrypt.dll ordinal import definition
-hpack.ps1        PE header compaction step
+ncmmini.asm      MASM 汇编主源码
+build.cmd        本地一键构建脚本
+bcrypt_ord.def   bcrypt.dll 序号导入定义
+hpack.ps1        PE 头部压缩脚本
 ```
 
-The build output is written to:
+构建产物会输出到：
 
 ```text
 ..\exe\NCM转换器.exe
 ```
 
-## Build Requirements
+## 构建要求
 
 - Windows
-- Microsoft Visual Studio 2022 Build Tools with MSVC x86 tools
+- Microsoft Visual Studio 2022 Build Tools，并安装 MSVC x86 工具链
 - PowerShell
 
-Run:
+构建方式：
 
 ```bat
 build.cmd
 ```
 
-## Runtime Requirements
+## 运行要求
 
-- Windows 7 or later
-- x86 program support
-- System DLLs normally included with Windows:
+- Windows 7 或更高版本
+- 支持运行 32 位 x86 程序
+- 系统自带以下 DLL：
   - `kernel32.dll`
   - `user32.dll`
   - `comdlg32.dll`
   - `bcrypt.dll`
 
-Windows 10 and Windows 11 should run it directly. Windows XP is not supported.
+普通 Windows 10 / Windows 11 可以直接运行。Windows XP 不支持。
 
-## Reference
+## 参考
 
-This project references the NCM parsing approach from the ncmdump lineage:
+本项目参考了 ncmdump 系列项目的 NCM 格式解析思路：
 
 - taurusxin/ncmdump: https://github.com/taurusxin/ncmdump
-- Original ncmdump lineage: anonymous5l/ncmdump
+- 原始 ncmdump 脉络：anonymous5l/ncmdump
 
-This repository is a minimal MASM reimplementation, not a direct fork.
+本仓库不是直接 fork，而是一个面向极小体积的 MASM 重新实现版本。
 
-## Notes
+## 说明
 
-The executable uses aggressive size optimizations, including fixed image base,
-writable text section, ordinal bcrypt imports, merged PE sections, and PE header
-compaction.
+本项目为了压缩体积使用了比较激进的 PE 和链接优化，包括固定镜像基址、可写 `.text` 段、bcrypt 序号导入、合并 PE 段和 PE 头部压缩。
