@@ -3,7 +3,7 @@
 一个很小的 Windows 本地 `.ncm` 转换工具。
 
 用 x86 MASM 写的。
-主要目标就是小，能用，然后别带一堆运行库。
+主要目标就是小，能用
 
 ## 用法
 
@@ -57,7 +57,6 @@ build.cmd
 
 Windows 10 / 11 一般直接能跑。
 
-XP 就算了，太古早。
 
 ## 参考
 
@@ -66,20 +65,3 @@ NCM 结构解析参考了 ncmdump 这一系：
 - https://github.com/taurusxin/ncmdump
 - anonymous5l/ncmdump
 
-不是 fork。
-
-这边是重新写的极小 MASM 版。
-
-## 体积
-
-为了压体积，做了不少比较激进的东西：
-
-- 固定镜像基址
-- 可写 `.text` 段
-- bcrypt 序号导入
-- 合并 PE 段
-- PE 头部压缩
-
-所以它不是那种标准模板工程。
-
-更像是能跑就往小里怼的版本。
